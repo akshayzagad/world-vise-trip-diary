@@ -1,12 +1,24 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Product from "./pages/Product.jsx";
+import Pricing from "./pages/Pricing.jsx";
+import Homepage from "./pages/homepage.jsx";
+import PageNotFound from "./pages/PageNotFound.jsx";
+import AppLayout from "./pages/AppLayout.jsx";
+
 function App() {
-  const x = 10;
   return (
-    <div>
-      <h1>Welcome I am akshay zagade</h1>
-    </div>
-  )
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="Product" element={<Product />} />
+        <Route path="Pricing" element={<Pricing />} />
+        <Route path="App" element={<AppLayout />} />
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
 
 
