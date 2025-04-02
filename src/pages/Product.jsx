@@ -1,10 +1,15 @@
+import PageNav from "../components/PageNav";
 import styles from "./Product.module.css";
-import PageNav from "../components/PageNav"
 
 export default function Product() {
+  const logoStyle = {
+    height: "5.2rem"
+  };
   return (
+    
     <main className={styles.product}>
-       <PageNav/>
+      <PageNav className={logoStyle}/>
+
       <section>
         <img
           src="img-1.jpg"

@@ -14,8 +14,12 @@
   align-items: center;
 }
 
-.product img {
-  width: 100%;
+.product section img {
+  width: 100%; /* Apply this style only to images inside the section of .product */
+}
+
+.product > img {
+  width: 100%; /* Ensure this applies only to direct child images of .product */
 }
 
 .product h2 {
