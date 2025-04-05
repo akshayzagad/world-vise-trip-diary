@@ -1,13 +1,15 @@
 import CityItem from './CityItem'
 import styles from './CityList.module.css'
 import Spinner from './Spinner'
+import Message from './Message'
 
 function CityList({ cities, isLoading }) {
   if (isLoading) return <Spinner/>;
 
+
   // Ensure cities is an array before mapping
   if (!Array.isArray(cities) || cities.length === 0) {
-    return <p>No cities available.</p>;
+    return (<Message message={"Add your first city by clicking city on a map"}/>);
   }
 
   return (
