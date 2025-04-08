@@ -11,30 +11,12 @@ import CityList from "./components/CityList.jsx";
 import CountryList from "./components/CountryList.jsx"
 import City from "./components/City.jsx";
 import Form from "./components/Form.jsx"
-
-const Base_URL = "http://localhost:9000/";
+import { CitiesProvider } from "../Context/CitiesContext.jsx";
 
 function App() {
-  const [cities, setCities] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(function () {
-
-    async function fetchCities() {
-      try {
-        setIsLoading(true);
-        const res = await fetch(`${Base_URL}cities`);
-        const data = await res.json();
-        setCities(data);
-      } catch (error) {
-        alert(`There was an ${error}`)
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    fetchCities();
-  }, []);
   return (
+    <CitiesProvider>
     <BrowserRouter>
       <Routes>
         <Route index element={<Homepage />} />
@@ -44,13 +26,14 @@ function App() {
         <Route path="App" element={<AppLayout />} >
           <Route index element={<Navigate replace to="cities"/>} />
           <Route path="cities/:id" element={<City/>}></Route>
-          <Route path="cities" element={<CityList cities={cities} isLoading={isLoading}/>} />
-          <Route path="country" element={<CountryList cities={cities} isLoading={isLoading}/>} />
+          <Route path="cities" element={<CityList />} />
+          <Route path="country" element={<CountryList/> }/>
           <Route path="form" element={<Form/>} />
         </Route>
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
+    </CitiesProvider>
   );
 }
 
