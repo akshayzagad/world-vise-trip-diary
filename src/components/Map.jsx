@@ -12,7 +12,8 @@ function Map() {
 
   const mapLat = searchParam.get("lat");
   const mapLng = searchParam.get("lng");
-
+  
+  
   useEffect(() => {
     if (mapLat && mapLng) {
       setMapPosition([mapLat, mapLng]); // Update position if lat/lng are available
@@ -50,6 +51,8 @@ function Map() {
 
 function ChangeCenter({ position }) {
   const map = useMap();
+  console.log(position);
+  
   map.setView(position);
   return null;
 }
