@@ -12,7 +12,7 @@ function Map() {
 
   const mapLat = searchParam.get("lat");
   const mapLng = searchParam.get("lng");
-  console.log([mapLat, mapLng]);
+  
   
   useEffect(() => {
     if (mapLat && mapLng) {
