@@ -19,7 +19,7 @@ function Map() {
   const [mapPosition, setMapPosition] = useState([40, 0]); // Default position
   const {getPosition,
     isLoading: isLoadingPosition,
-    position: geolocationPosition,}
+    position: geolocationPosition}
    = useGeolocation();
 
   const mapLat = searchParam.get("lat");
@@ -33,7 +33,7 @@ function Map() {
 
   useEffect(
     function () {
-      setMapPosition(geolocationPosition.lat,geolocationPosition.lng);
+     if(geolocationPosition) setMapPosition([geolocationPosition.lat,geolocationPosition.lng]);
     },
     [geolocationPosition]
   );
