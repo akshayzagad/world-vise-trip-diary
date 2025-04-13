@@ -74,8 +74,7 @@ function Map() {
 
 function ChangeCenter({ position }) {
   const map = useMap();
-  console.log(position);
-
+  // console.log(position);
   map.setView(position);
   return null;
 }
@@ -84,7 +83,7 @@ function DetectClick() {
   const navigate = useNavigate();
   useMapEvent({
     click: (e) => {
-      console.log(e);
+      // console.log(e);
       navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`);
     },
   });
