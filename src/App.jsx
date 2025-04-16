@@ -11,28 +11,31 @@ import CountryList from "./components/CountryList.jsx"
 import City from "./components/City.jsx";
 import Form from "./components/Form.jsx"
 import { CitiesProvider } from "../Context/CitiesContext.jsx";
+import { AuthProvider } from "../Context/FakeAuthContext.jsx";
 
 function App() {
 
   return (
-    <CitiesProvider>
-    <BrowserRouter>
-      <Routes>
-        <Route index element={<Homepage />} />
-        <Route path="Product" element={<Product />} />
-        <Route path="Pricing" element={<Pricing />} />
-        <Route path="Login" element={<Login />} />
-        <Route path="App" element={<AppLayout />} >
-          <Route index element={<Navigate replace to="cities"/>} />
-          <Route path="cities/:id" element={<City/>}></Route>
-          <Route path="cities" element={<CityList />} />
-          <Route path="country" element={<CountryList/> }/>
-          <Route path="form" element={<Form/>} />
-        </Route>
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
-    </BrowserRouter>
-    </CitiesProvider>
+    <AuthProvider>
+      <CitiesProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route index element={<Homepage />} />
+            <Route path="Product" element={<Product />} />
+            <Route path="Pricing" element={<Pricing />} />
+            <Route path="Login" element={<Login />} />
+            <Route path="App" element={<AppLayout />}>
+              <Route index element={<Navigate replace to="cities" />} />
+              <Route path="cities/:id" element={<City />}></Route>
+              <Route path="cities" element={<CityList />} />
+              <Route path="country" element={<CountryList />} />
+              <Route path="form" element={<Form />} />
+            </Route>
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </CitiesProvider>
+    </AuthProvider>
   );
 }
 

@@ -2,46 +2,54 @@ import { createContext, useContext, useReducer } from "react";
 
 const AuthContext = createContext();
 
-const initialState = {user:null,isAuthenticate:false};
+const initialState = { user: null, isAuthenticate: false };
 
-function reducer(state,action){
-    switch (state,action) {
-        case "login":
-       return {...state,user:action.payload,isAuthenticate:true}
-           case "logOut":
-            return {...state,isAuthenticate:false,user:null}
-        default:
-            throw new Error("Unknown action type");
-    }
+function reducer(state, action) {
+  switch (action.type) { // Fixed: Use action.type instead of state.action
+    case "login":
+      return { ...state, user: action.payload, isAuthenticate: true };
+    case "logOut":
+      return { ...state, isAuthenticate: false, user: null };
+    default:
+      throw new Error("Unknown action type");
+  }
 }
 
 const FAKE_USER = {
-    name: "Jack",
-    email: "jack@example.com",
-    password: "qwerty",
-    avatar: "https://i.pravatar.cc/100?u=zz",
-  };
+  name: "Jack",
+  email: "jack@example.com",
+  password: "qwerty",
+  avatar: "https://i.pravatar.cc/100?u=zz",
+};
 
-function AuthProvider({children}) {
-    const [{user,isAuthenticate},dispatch] = useReducer(reducer,initialState)
+function AuthProvider({ children }) {
+  const [{ user, isAuthenticate }, dispatch] = useReducer(
+    reducer,
+    initialState
+  );
 
-    function login(email,password){
-        if (email === FAKE_USER.email && password === FAKE_USER.password) {
-            dispatch({type:"login",payload:FAKE_USER})
-        }
+  function login(email, password) {
+    if (email === FAKE_USER.email && password === FAKE_USER.password) {
+      dispatch({ type: "login", payload: FAKE_USER });
     }
+  }
 
-    function logOut () {
-        dispatch({type:"logOut"})
-    }
+  function logOut() {
+    dispatch({ type: "logOut" });
+  }
 
-    return <AuthContext.Provider value={{user,isAuthenticate,login,logOut}}>{children}</AuthContext.Provider>
+  return (
+    <AuthContext.Provider value={{ user, isAuthenticate, login, logOut }}>
+      {children}
+    </AuthContext.Provider>
+  );
 }
 
-function useAuth(){
-    const context = useContext(AuthContext);
+function useAuth() {
+  const context = useContext(AuthContext);
 
-    if (context === undefined) throw new Error("AuthContext use outside the AuthProvider");
-    
+  if (context === undefined)
+    throw new Error("AuthContext use outside the AuthProvider");
+  return context;
 }
-export {AuthProvider,useAuth}
+export { AuthProvider, useAuth };
