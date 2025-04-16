@@ -9,31 +9,24 @@ export default function Login() {
   // PRE-FILL FOR DEV PURPOSES
   const [email, setEmail] = useState("jack@example.com");
   const [password, setPassword] = useState("qwerty");
-  const {login, isAuthenticate} = useAuth();
+  const { login, isAuthenticate } = useAuth();
 
   const navigate = useNavigate();
 
-  function handleSubmit(e){
+  function handleSubmit(e) {
     e.preventDefault();
-    if(email && password) login(email,password);
+    if (email && password) login(email, password);
   }
 
-  useEffect(
-    function () {
-      if (isAuthenticate)
-        navigate("/app", {
-          replace: true,
-        }); /** 
-        If isAuthenticate is true, the user is redirected to /app, and the login page is removed from the browser's history.
-        If isAuthenticate is false, the user remains on the login page.
-        */
-    },
-    [isAuthenticate,navigate]
-  );
+  useEffect(() => {
+    if (isAuthenticate) {
+      navigate("/app", { replace: true }); // Redirect to /app after login
+    }
+  }, [isAuthenticate, navigate]);
 
   return (
     <main className={styles.login}>
-      <PageNav/>
+      <PageNav />
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.row}>
           <label htmlFor="email">Email address</label>
