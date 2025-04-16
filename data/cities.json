@@ -35,6 +35,18 @@
         "lat": "40.1452892956766",
         "lng": "-3.7987626357504127"
       }
+    },
+    {
+      "id": "cbde",
+      "cityName": "Ahmadnagar",
+      "country": "India",
+      "emoji": "🇮🇳",
+      "date": "2025-04-15T16:42:36.107Z",
+      "notes": "gOOD LOCATION",
+      "position": {
+        "lat": "19.114029215761995",
+        "lng": "74.82788085937501"
+      }
     }
   ]
 }
