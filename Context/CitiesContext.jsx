@@ -1,5 +1,6 @@
 import React, {
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useReducer,
@@ -73,7 +74,7 @@ function CitiesProvider({ children }) {
     fetchCities();
   }, []);
 
-  async function getCity(id) {
+  const getCity= useCallback( async function getCity(id) {
     if (Number(id) === currentCity.id) return; // when we select same city for two times
     //then it is not get through api and did not render it again
     dispatch({ type: "loading" });
@@ -87,7 +88,7 @@ function CitiesProvider({ children }) {
         payload: "There was an error getting cities...",
       });
     }
-  }
+  },[currentCity.id])
   async function creatCity(newCity) {
     dispatch({ type: "loading" });
     try {
